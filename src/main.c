@@ -36,13 +36,13 @@ int main(int argc, char** argv){
             save_file_contents(argv[1], buffer, new_len);
             break;
         }
-        if(c == 127){
+        if(c == 127 && cursor > 0 && new_len > 0){
            memcpy(buffer+cursor-1, buffer+cursor, new_len-cursor);
            *(buffer+new_len) = 0;
            cursor--;
            new_len--;
         }
-        if(c == DEL_KEY){
+        if(c == DEL_KEY && new_len > 0){
            memcpy(buffer+cursor, buffer+cursor+1, new_len-cursor);
            *(buffer+new_len) = 0; new_len--;
         }
